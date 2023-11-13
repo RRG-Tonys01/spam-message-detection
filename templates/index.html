@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Spam Detection</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</head>
+<body>
+    <div class="envelope-wrapper">
+        <div id="envelope" class="close">
+            <div class="front flap"></div>
+            <div class="front pocket"></div>
+            <div class="letter">
+                <!-- <div class="words line1"></div> -->
+                <div class="words line2" id="result"></div>
+                <!-- <div class="words line3"></div>
+                <div class="words line4"></div> -->
+            </div>
+            <div class="hearts">
+                <div class="heart a1"></div>
+                <div class="heart a2"></div>
+                <div class="heart a3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="reset">
+        <form id="myForm">
+            <input type="text" class="input" name="message" id="message" placeholder="Input Your Message">
+            <!-- <button id="check">Check</button> -->
+        </form>
+        <button id="check">Check</button>
+        <!-- <button id="open">Open</button> -->
+        <button id="reset">Reset</button>
+    </div>
+</body>
+</html>
