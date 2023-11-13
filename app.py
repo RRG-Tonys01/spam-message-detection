@@ -1,14 +1,16 @@
-import numpy as np  # Import NumPy for numerical operations
-import pandas as pd  # Import Pandas for data manipulation
-import tensorflow as tf  # Import TensorFlow for machine learning
-from sklearn.model_selection import train_test_split  # Import train_test_split for splitting data
-from tensorflow.keras.models import Sequential, load_model  # Import Sequential and load_model for building and loading models
-from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, Dense  # Import layers for building the neural network
-from tensorflow.keras.optimizers import Adam  # Import Adam optimizer for training the model
-from tensorflow.keras.preprocessing.text import Tokenizer  # Import Tokenizer for text tokenization
-from tensorflow.keras.preprocessing.sequence import pad_sequences  # Import pad_sequences for padding sequences
-from flask import Flask, render_template, request, jsonify  # Import Flask for creating a web application
+import numpy as np  
+import pandas as pd  
+import tensorflow as tf 
+from sklearn.model_selection import train_test_split 
+from tensorflow.keras.models import Sequential, load_model  
+from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, Dense 
+from tensorflow.keras.optimizers import Adam 
+from tensorflow.keras.preprocessing.text import Tokenizer 
+from tensorflow.keras.preprocessing.sequence import pad_sequences 
+from flask import Flask, render_template, request, jsonify 
 
+import warnings 
+warnings.filterwarnings("ignore")
 
 
 
@@ -55,10 +57,8 @@ class SpamDetector:
 
     def load_or_train_model(self):
         try:
-            # Coba untuk load model yang sudah ada
             model = load_model(self.model_save_path)
         except (OSError, IOError):
-            # Jika tidak dapat load, maka buat dan train model
             model = self.build_model()
             model.save(self.model_save_path)
         return model
@@ -80,7 +80,7 @@ class FlaskApp:
 
     def register_routes(self):
         @self.app.route("/")
-        def hello_world():
+        def home():
             return render_template('index.html')
 
         @self.app.route("/message", methods=['POST'])
@@ -103,8 +103,9 @@ class FlaskApp:
         if __name__ == "__main__":
             self.app.run(debug=True)
 
-# Inisialisasi SpamDetector dan FlaskApp
-model_save_path = "spam_model.h5"  # Sesuaikan dengan path dan nama file yang diinginkan
+
+
+model_save_path = "spam_model.h5"
 spam_detector = SpamDetector("spam-dataset.csv", model_save_path)
 flask_app = FlaskApp(spam_detector)
 flask_app.run_app()
